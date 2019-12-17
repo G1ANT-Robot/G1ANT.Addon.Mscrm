@@ -113,7 +113,6 @@ namespace G1ANT.Addon.Mscrm
             }
         }
 
-
         public void ClickByElement(string search, string by = "id", bool trigger = false, bool noWait = false)
         {
             Element continueLink = FindElement(search, by);

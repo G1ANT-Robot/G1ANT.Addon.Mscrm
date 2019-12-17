@@ -6,6 +6,8 @@ namespace G1ANT.Addon.Mscrm
     [Command(Name = "mscrm.activate", Tooltip = "This command brings Microsoft Dynamics CRM Internet Explorer instance to the foreground.")]
     public class MsCrmActivateCommand : Command
     {
+        public MsCrmActivateCommand(AbstractScripter scripter) : base(scripter) { }
+
         public class Arguments : CommandArguments
         {
             [Argument(Tooltip = "Arguments style defines the style of a window – maximized, minimized or restored (restore from minimized state)")]
@@ -14,7 +16,6 @@ namespace G1ANT.Addon.Mscrm
             [Argument]
             public VariableStructure Result { get; set; } = new VariableStructure("result");
         }
-        public MsCrmActivateCommand(AbstractScripter scripter) : base(scripter) { }
 
         public void Execute(Arguments arguments)
         {

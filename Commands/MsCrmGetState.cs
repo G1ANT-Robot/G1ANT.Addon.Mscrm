@@ -7,6 +7,7 @@ namespace G1ANT.Addon.Mscrm
     [Command(Name = "mscrm.getstate",Tooltip = "This command allows capturing current state displayed in the status bar (left side) at bottom of the form.")]
     public class MsCrmGetStateCommand : Command
     {
+        public MsCrmGetStateCommand(AbstractScripter scripter) : base(scripter) { }
         public class Arguments : CommandArguments
         {
             [Argument(DefaultVariable = "timeoutcrm")]

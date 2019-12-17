@@ -6,6 +6,8 @@ namespace G1ANT.Addon.Mscrm
     [Command(Name = "mscrm.attach", Tooltip = "This command connects to open instance of CRM in Internet Explorer.")]
     public class MsCrmAttachCommand : Command
     {
+        public MsCrmAttachCommand(AbstractScripter scripter) : base(scripter) { }
+        
         public class Arguments : CommandArguments
         {
             [Argument(Tooltip = "Enter the search phrase here")]
@@ -20,8 +22,7 @@ namespace G1ANT.Addon.Mscrm
             [Argument(DefaultVariable = "timeoutcrm")]
             public override TimeSpanStructure Timeout { get; set; }
         }
-        public MsCrmAttachCommand(AbstractScripter scripter) : base(scripter)
-        { }
+
         public void Execute(Arguments arguments)
         {
             var wrapper = MsCrmManager.Instance.AttachToExistingCRM(arguments.Phrase.Value, arguments.By.Value);

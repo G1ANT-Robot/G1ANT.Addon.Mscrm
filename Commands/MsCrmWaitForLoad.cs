@@ -7,6 +7,8 @@ namespace G1ANT.Addon.Mscrm
     {
         public class Arguments : CommandArguments
         {
+            public MsCrmWaitForLoadCommand(AbstractScripter scripter) : base(scripter) { }
+            
             [Argument(Tooltip = "Phrase to find the Element with", Required = true)]
             public TextStructure Search { get; set; }
 
@@ -16,8 +18,7 @@ namespace G1ANT.Addon.Mscrm
             [Argument]
             public override TimeSpanStructure Timeout { get; set; } = new TimeSpanStructure(10000);
         }
-         public MsCrmWaitForLoadCommand(AbstractScripter scripter) : base(scripter)
-        { }
+
         public void Execute(Arguments arguments)
         {
             var currentCrm = MsCrmManager.Instance.CurrentCRM;
