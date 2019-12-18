@@ -18,8 +18,7 @@ namespace G1ANT.Addon.Mscrm
 
              
         }
-        public MsCrmGetStateCommand(AbstractScripter scripter) : base(scripter)
-        { }
+
         public void Execute(Arguments arguments)
         {
             Scripter.Variables.SetVariableValue(arguments.Result.Value, new TextStructure(string.Empty));

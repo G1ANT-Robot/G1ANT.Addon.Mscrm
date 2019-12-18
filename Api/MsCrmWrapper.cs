@@ -116,17 +116,12 @@ namespace G1ANT.Addon.Mscrm
         public void ClickByElement(string search, string by = "id", bool trigger = false, bool noWait = false)
         {
             Element continueLink = FindElement(search, by);
-            if (!noWait)
-            {
-                continueLink.WaitUntilExists();
-                continueLink.WaitForComplete();
-            }
-
             if (continueLink == null)
             {
                 throw new ApplicationException("Element to click not found");
             }
-            else if (trigger)
+            
+            if (trigger)
             {
                 if (noWait)
                 {
@@ -136,6 +131,17 @@ namespace G1ANT.Addon.Mscrm
                 {
                     continueLink?.FireEvent("onclick");
                 }
+            }
+
+            if (!noWait)
+            {
+                continueLink?.WaitUntilExists();
+                continueLink?.WaitForComplete();
+                continueLink?.Click();
+            }
+            else if (noWait)
+            {
+                continueLink?.ClickNoWait();
             }
         }
 
@@ -209,6 +215,7 @@ namespace G1ANT.Addon.Mscrm
 
         private void SetValInDateTimeTextField(Element element, string value)
         {
+            element.Focus();
             element.Click();
             TypeText(value);
             TypeText("⋘ENTER⋙");
@@ -216,12 +223,14 @@ namespace G1ANT.Addon.Mscrm
 
         private void SetValInTextField(Element element, string value)
         {
+            element.Focus();
             element.Click();
             TypeText(value);
         }
 
         private void SetValInLookupField(Element element, string value)
         {
+            element.Focus();
             element.Click();
             TypeText(value);
             TypeText("⋘DOWN⋙");

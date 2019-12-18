@@ -5,10 +5,9 @@ namespace G1ANT.Addon.Mscrm
     [Command(Name = "mscrm.waitforload")]
     public class MsCrmWaitForLoadCommand : Command
     {
+        public MsCrmWaitForLoadCommand(AbstractScripter scripter) : base(scripter) { }
         public class Arguments : CommandArguments
         {
-            public MsCrmWaitForLoadCommand(AbstractScripter scripter) : base(scripter) { }
-            
             [Argument(Tooltip = "Phrase to find the Element with", Required = true)]
             public TextStructure Search { get; set; }
 

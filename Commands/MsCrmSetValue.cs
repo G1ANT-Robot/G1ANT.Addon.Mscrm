@@ -5,10 +5,10 @@ namespace G1ANT.Addon.Mscrm
     [Command(Name = "mscrm.setvalue", Tooltip = "This command allows to set value of a field in CRM form. This command allows to handle fields like: text, lookup, tree lookup and dropdown.")]
     public class MsCrmSetValueCommand : Command
     {
+        public MsCrmSetValueCommand(AbstractScripter scripter) : base(scripter) { }
         public class Arguments : CommandArguments
         {
-            public MsCrmSetValueCommand(AbstractScripter scripter) : base(scripter) { }
-            
+ 
             [Argument(Tooltip = "Phrase to find the Element with", Required = true)]
             public TextStructure Search { get; set; }
 
