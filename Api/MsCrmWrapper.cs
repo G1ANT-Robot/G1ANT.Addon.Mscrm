@@ -132,8 +132,7 @@ namespace G1ANT.Addon.Mscrm
                     continueLink?.FireEvent("onclick");
                 }
             }
-
-            if (!noWait)
+            else if (!noWait)
             {
                 continueLink?.WaitUntilExists();
                 continueLink?.WaitForComplete();
