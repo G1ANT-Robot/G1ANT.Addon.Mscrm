@@ -14,9 +14,7 @@ namespace G1ANT.Addon.Mscrm
             public override TimeSpanStructure Timeout { get; set; }
 
             [Argument]
-            public VariableStructure Result { get; set; } = new VariableStructure("result");
-
-             
+            public VariableStructure Result { get; set; } = new VariableStructure("result");       
         }
 
         public void Execute(Arguments arguments)
