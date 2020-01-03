@@ -267,7 +267,6 @@ namespace G1ANT.Addon.Mscrm
             }
         }
 
-
         public bool IsElementVisible(string id, string by = "id")
         {
             Element element = FindElement(id, by);
