@@ -163,6 +163,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="WatiN.Core.dll" />
+    <EmbeddedResource Include="Microsoft.mshtml.dll" />
+    <EmbeddedResource Include="Interop.SHDocVw.dll" />
     <Content Include="Wizards\robot.ico" />
     <EmbeddedResource Include="Wizards\MscrmRecorderForm.resx">
       <DependentUpon>MscrmRecorderForm.cs</DependentUpon>
