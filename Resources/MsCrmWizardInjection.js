@@ -55,52 +55,7 @@
             return null;
         }
     }
-
-	/*
-    function getMscrmSetValueElement(element) {
-        while (
-            (
-                !element.id // element needs an id to be mscrm.setvalue element
-            ) && element.parentElement
-        ) {
-            if (element.id && (element.getAttribute("src") === "/_imgs/search_normal.gif" || element.id.endsWith("_lookupSearchIcon") ||
-                element.getAttribute("src") === "/_imgs/search_hover.gif")) {
-                return null; // search magnifier cliecked, we should not set it using mscrm.setvalue
-            }
-            element = element.parentElement;
-        }
-        if (element.id && (element.getAttribute("src") === "/_imgs/search_normal.gif" ||
-            element.id.endsWith("_lookupSearchIcon") ||
-            element.getAttribute("src") === "/_imgs/search_hover.gif")) {
-
-            return null; // search magnifier cliecked, we should not set it using mscrm.setvalue
-        }
-        var containsNeededClass = false;
-        for (var i = 0; i < element.classList.length; i++) {
-            var elClass = element.classList[i];
-            if (elClass === 'lookup' ||
-                elClass === 'ms-crm-Lookup' ||
-                elClass === 'ms-crm-Inline-Value' ||
-                elClass === 'ms-crm-Inline-Lookup' ||
-                elClass === 'picklist' ||
-                elClass === 'ms-crm-Inline-Chrome') {
-                containsNeededClass = true;
-                break;
-            }
-        }
-        element = (element.id && element.tagName === 'DIV' && containsNeededClass) ? element : null;
-        if (!element) {
-            return null;
-        }
-        else if (element.getAttribute("hascompositedata") !== "true") {
-            return { element: element, action: 'setvalue' }
-        }
-        else {
-            return { element: element, action: 'click' }
-        }
-    }
-	*/
-	
+    	
 	function getMscrmSetValueElement(element) 
 	{
 		if(element.id.includes('fieldControl-LookupResultsDropdown') || element.tagName == 'select' || element.getAttribute('data-id') == 'header_process_decisionmaker.fieldControl-checkbox-toggle' || element.tagName == 'textarea'||element.tagName == 'input')
