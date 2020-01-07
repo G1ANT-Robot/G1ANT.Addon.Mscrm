@@ -163,9 +163,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="WatiN.Core.dll" />
-    <EmbeddedResource Include="Microsoft.mshtml.dll" />
-    <EmbeddedResource Include="Interop.SHDocVw.dll" />
     <Content Include="Wizards\robot.ico" />
     <EmbeddedResource Include="Wizards\MscrmRecorderForm.resx">
       <DependentUpon>MscrmRecorderForm.cs</DependentUpon>
@@ -187,6 +184,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..packages\*\lib\net40\WatiN.Core.dll">
+    </EmbeddedResource>
+    <EmbeddedResource Include="..packages\*\lib\net40\Interop.SHDocVw.dll">
+    </EmbeddedResource>
+    <EmbeddedResource Include="..packages\*\lib\net40\Microsoft.mshtml.dll">
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
