@@ -72,19 +72,19 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="G1ANT.Language, Version=4.105.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\G1ANT.Language.4.105.0\lib\net452\G1ANT.Language.dll</HintPath>
+      <HintPath>..\packages\G1ANT.Language.4.105.0\lib\net452\G1ANT.Language.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Interop.SHDocVw, Version=1.1.0.0, Culture=neutral, PublicKeyToken=db7cfd3acb5ad44e, processorArchitecture=MSIL">
-      <HintPath>packages\WatiN.2.1.0\lib\net40\Interop.SHDocVw.dll</HintPath>
+      <HintPath>..\packages\WatiN.2.1.0\lib\net40\Interop.SHDocVw.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <HintPath>packages\WatiN.2.1.0\lib\net40\Microsoft.mshtml.dll</HintPath>
+      <HintPath>..\packages\WatiN.2.1.0\lib\net40\Microsoft.mshtml.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -111,7 +111,7 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="WatiN.Core, Version=2.1.0.1196, Culture=neutral, PublicKeyToken=db7cfd3acb5ad44e, processorArchitecture=MSIL">
-      <HintPath>packages\WatiN.2.1.0\lib\net40\WatiN.Core.dll</HintPath>
+      <HintPath>..\packages\WatiN.2.1.0\lib\net40\WatiN.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -187,23 +187,15 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..packages\*\lib\net40\WatiN.Core.dll">
+    <EmbeddedResource Include="..\packages\WatiN.2.1.0\lib\net40\WatiN.Core.dll">
+      <Link>WatiN.Core.dll</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..packages\*\lib\net40\Interop.SHDocVw.dll">
+    <EmbeddedResource Include="..\packages\WatiN.2.1.0\lib\net40\Interop.SHDocVw.dll">
+      <Link>Interop.SHDocVw.dll</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..packages\*\lib\net40\Microsoft.mshtml.dll">
+    <EmbeddedResource Include="..\packages\WatiN.2.1.0\lib\net40\Microsoft.mshtml.dll">
+      <Link>Microsoft.mshtml.dll</Link>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
