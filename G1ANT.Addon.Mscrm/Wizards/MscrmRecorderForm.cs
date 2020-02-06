@@ -10,27 +10,16 @@ namespace G1ANT.Addon.Mscrm
 {
     public partial class MscrmRecorderForm : Form
     {
-        //TODO public event InsertTextToRobot InsertTextToRobotHandler;
-
         private bool stopRecording = false;
         private bool isRecording = false;
         private Thread recordingThread = null;
         private int xPosition;
         private int yPosition;
+        IMainForm mainForm;
 
-        private static MscrmRecorderForm instance;
-        public static MscrmRecorderForm Instance
+        public MscrmRecorderForm(IMainForm mainForm)
         {
-            get
-            {
-                if (instance == null)
-                    instance = new MscrmRecorderForm();
-                return instance;
-            }
-        }
-
-        private MscrmRecorderForm()
-        {
+            this.mainForm = mainForm;
             InitializeComponent();
             SetUrlFromRegistry();
         }
@@ -128,10 +117,8 @@ namespace G1ANT.Addon.Mscrm
                         if (!stopRecording)
                         {
                             var action = div.GetAttributeValue("data-element-type");
-                            var id = div.GetAttributeValue("target_id");
-                            var className = div.GetAttributeValue("target_class");
-                            string searchBy = !string.IsNullOrEmpty(id) ? "id" : "class";
-                            string searchPhrase = !string.IsNullOrEmpty(id) ? id : className;
+                            string searchBy = div.GetAttributeValue("target_by");
+                            string searchPhrase = div.GetAttributeValue("target_search");
                             string command = string.Empty;
                             bool addCommand = true;
                             switch (action)
@@ -226,8 +213,8 @@ namespace G1ANT.Addon.Mscrm
         {
             stopRecording = true;
             StartRecordingButton.Text = "Start recording";
-            e.Cancel = true;
-            this.Hide();
+            //e.Cancel = true;
+            //this.Hide();
         }
 
         private void InsertScriptToMainWindow_Click(object sender, EventArgs e)
@@ -235,7 +222,8 @@ namespace G1ANT.Addon.Mscrm
             string textToInsert = AddMscrmAttachIntroCheckBox.Checked ?
                 $"mscrm.attach ‴{MsCrmUrlPhrase}‴{System.Environment.NewLine}{RecordedScriptRichTextBox.Text}" :
                 RecordedScriptRichTextBox.Text;
-        //TODO    InsertTextToRobotHandler?.Invoke(textToInsert);
+
+            mainForm?.InsertTextIntoCurrentEditor(textToInsert);
         }
 
         private void UrlPhraseTextBox_TextChanged(object sender, EventArgs e)

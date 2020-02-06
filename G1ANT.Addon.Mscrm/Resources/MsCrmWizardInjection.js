@@ -3,16 +3,23 @@
     function elementClicked(e) {
         var elementIsCrmField = false;
         var mscrmElement = getMscrmSetValueElement(e.target);
-        var mscrmFilter = 'id';
+        var mscrmFilter = '';
+        var mscrmSearch = '';
         if (mscrmElement) {
             elementIsCrmField = mscrmElement.action === 'setvalue';
             mscrmElement = mscrmElement.element;
+            var mscrmItem = getMscrmClickedElement(mscrmElement);
+            if (mscrmItem) {
+                mscrmFilter = mscrmItem.by;
+                mscrmSearch = mscrmItem.search;
+            }
         }
         else {
             var mscrmClickItem = getMscrmClickedElement(e.target);
             if (mscrmClickItem) {
                 mscrmElement = mscrmClickItem.element;
                 mscrmFilter = mscrmClickItem.by;
+                mscrmSearch = mscrmClickItem.search;
             }
         }
 
@@ -31,18 +38,14 @@
                 var name2 = currentIframe.name ? currentIframe.name : '';
                 element.setAttribute('target_iframe_title', name2);
             }
-            if (mscrmFilter === 'id') {
-                element.setAttribute('target_id', mscrmElement.id);
-            }
-            else if (mscrmFilter === 'class') {
-                element.setAttribute('target_class', mscrmElement.className);
-            }
+            element.setAttribute('target_by', mscrmFilter);
+            element.setAttribute('target_search', mscrmSearch);
             element.setAttribute('data-element-type', elementIsCrmField ? 'setvalue' : 'click');
             window.document.body.appendChild(element);
             console.log((new Date()).format("dd/MM/yyyy hh:mm:ss") + ": Element added. " +
                 "Action: " + element.getAttribute('data-element-type') + " " +
-                "Id: " + element.getAttribute('target_id') + " " +
-                "Class: " + element.getAttribute('target_class'));
+                "By: " + element.getAttribute('target_by') + " " +
+                "Search: " + element.getAttribute('target_search'));
             inject();
         }
     }
@@ -58,7 +61,11 @@
     	
 	function getMscrmSetValueElement(element) 
 	{
-		if(element.id.includes('fieldControl-LookupResultsDropdown') || element.tagName == 'select' || element.getAttribute('data-id') == 'header_process_decisionmaker.fieldControl-checkbox-toggle' || element.tagName == 'textarea'||element.tagName == 'input')
+        if (element.id.includes('fieldControl-LookupResultsDropdown') ||
+            element.tagName.toLowerCase() == 'select' ||
+            element.getAttribute('data-id') == 'header_process_decisionmaker.fieldControl-checkbox-toggle' ||
+            element.tagName.toLowerCase() == 'textarea' ||
+            element.tagName.toLowerCase() == 'input')
 		{
 			return { element: element, action: 'setvalue' }
 		}
@@ -69,13 +76,20 @@
 	}
 	
     function getMscrmClickedElement(element) {
-        while (!element.id && element.parentElement) {
+        while (element.parentElement) {
             if (element.className && element.className === 'ms-crm-InlineLookup-FooterSection-AddAnchor') {
-                return { by: 'class', element: element }
+                return { by: 'class', search: element.className, element: element }
             }
+            if (element.id) {
+                return { by: 'id', search: element.id, element: element }
+            }
+            if (element.getAttribute('data-id')) {
+                return { by: 'data-id', search: element.getAttribute('data-id'), element: element }
+            }
+
             element = element.parentElement;
         }
-        return (element.id) ? { by: 'id', element: element } : null;
+        return null;
     }
 
     function inject() {
@@ -99,6 +113,7 @@
                     try {
                         var currentElement = currentFrameElements[j];
                         if (currentElement.id ||
+                            currentElement.getAttribute('data-id') ||
                             (currentElement.className &&
                                 (currentElement.className === 'ms-crm-InlineLookup-FooterSection-AddAnchor') // lookup dialog window, 'new' link at the bottom
                             )) {

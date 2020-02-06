@@ -8,35 +8,28 @@ using System.Windows.Forms;
 
 namespace G1ANT.Addon.Mscrm
 {
-    [Wizard(Name = "Dynamics CRM Recorder", Menu = "Dynamics Recorder")]
+    [Wizard(Name = "Dynamics CRM Recorder", Menu = "Tools\\Wizards")]
     public class MscrmRecorderWizard : Wizard
     {
         public MscrmRecorderWizard() { }
-      //  private IWizardManager wizardManager;
-        private bool initialWindowPosition = true;
-        private bool initialInstance = true;
+
         public override void Execute(AbstractScripter scripter)
         {
-            MscrmRecorderForm recorderWindow = MscrmRecorderForm.Instance;
-            if (initialInstance)
+            IMainForm mainForm = null;
+
+            foreach (var form in Application.OpenForms)
             {
-              //  recorderWindow.InsertTextToRobotHandler += wizardManager.InsertTextToRobot;
-                initialInstance = false;
-            }
-            if (!recorderWindow.Visible)
-            {
-                recorderWindow.Show();
-                if (initialWindowPosition)
+                if (form is IMainForm)
                 {
-               //     recorderWindow.LocateInMiddleOfForm(wizardManager.Parent);
-                    initialWindowPosition = false;
+                    mainForm = form as IMainForm;
+                    break;
                 }
+            }
+
+            using (var recordingWizard = new MscrmRecorderForm(mainForm))
+            {
+                recordingWizard.ShowDialog();
             }            
         }
-        //TODO
-        //public void Initialize(IWizardManager wizardManager)
-        //{
-        //    this.wizardManager = wizardManager;
-        //}
     }
 }

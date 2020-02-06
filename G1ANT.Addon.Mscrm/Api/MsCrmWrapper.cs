@@ -155,14 +155,14 @@ namespace G1ANT.Addon.Mscrm
                 case "title":
                     element = Ie.Element(Find.ByTitle(search));
                     break;
-                case "role":
-                    element = Ie.Element(Find.By("role", search));
-                    break;
                 case "selector":
-                    element = Ie.Element(Find.ById(WatiNHelper.FindIdViaJQuery(Browser.AttachTo<IE>(Find.ByTitle(Ie.Url)), search, "", Command.Timeout)));
+                    element = Ie.Element(Find.ById(WatiNHelper.FindIdViaJQuery(Browser.AttachTo<IE>(Find.ByUrl(Ie.Url)), search, "", Command.Timeout)));
+                    break;
+                case "id":
+                    element = Ie.Element(Find.ById(search));
                     break;
                 default:
-                    element = Ie.Element(Find.ById(search));
+                    element = Ie.Element(Find.ById(WatiNHelper.FindIdViaJQuery(Browser.AttachTo<IE>(Find.ByUrl(Ie.Url)), $"[{by}='{search}']", "", Command.Timeout)));
                     break;
             }
             return element;
